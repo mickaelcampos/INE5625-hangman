@@ -2,41 +2,44 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Server {
 
     public static final int LISTENING_PORT = 5000;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        ServerSocket server = null;
-        Scanner input = null;
+        Server server = new Server();
+
         try {
-            server = new ServerSocket(LISTENING_PORT);
+            server.initServer();
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao inicializar o servidor!"); // porta em uso
+            System.exit(1);
+        }
+    }
 
+    private void initServer() throws IOException {
+        ServerSocket serverSocket = null;
+        try {
+            serverSocket = new ServerSocket(LISTENING_PORT);
             String hostAddress = InetAddress.getLocalHost().getHostAddress();
-    
             System.out.printf("Servidor inicializado em %s:%d.\n", hostAddress, LISTENING_PORT);
-
-            Socket client = server.accept(); // bloqueia execução
-
-            System.out.println("Nova conexão com o cliente " + client.getInetAddress()
-                .getHostAddress());
-
-            input = new Scanner(client.getInputStream());
-
-            while (input.hasNextLine()) {
-                System.out.println(input.nextLine());
+        
+            while (true) {
+                Socket client = serverSocket.accept(); // bloqueia execução
+                startClientConnection(client);
             }
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao criar o servidor!");
+            System.out.println("Ocorreu um erro ao criar o servidor!"); // porta em uso
             System.exit(1);
         } finally {
-            server.close();
-            if (input != null) {
-                input.close();
-            }
+            serverSocket.close();
         }
-
+    }
+    
+    private void startClientConnection(Socket client) {
+        ClientHandler handler = new ClientHandler(client);
+        Thread threadHandler = new Thread(handler);
+        threadHandler.start();
     }
 }
