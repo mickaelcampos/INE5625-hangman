@@ -6,12 +6,13 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
+
+    public static final int LISTENING_PORT = 5000;
     public static void main(String[] args) throws UnknownHostException, IOException {
 
-        String host = "127.0.0.1";
-        int port = 5000;
+        String hostAddress = "127.0.0.1";
 
-        Socket client = new Socket(host, port);
+        Socket client = new Socket(hostAddress, LISTENING_PORT);
         System.out.println("O client: " + client + " se conectou ao servidor!");
         Scanner input = new Scanner(System.in);
 
