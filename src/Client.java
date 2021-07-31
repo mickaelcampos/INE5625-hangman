@@ -14,15 +14,31 @@ public class Client {
 
         Socket client = new Socket(hostAddress, LISTENING_PORT);
         System.out.println("O client: " + client + " se conectou ao servidor!");
-        Scanner input = new Scanner(System.in);
 
-        PrintStream out = new PrintStream(client.getOutputStream());
+        Scanner input = null;
+        Scanner inputFromSocket = null;
+        PrintStream output = null;
 
-        while (input.hasNextLine()) {
-            out.println(input.nextLine());
+        while (true) {
+            try {
+                input = new Scanner(System.in); // dados inseridos no meu terminal
+                output = new PrintStream(client.getOutputStream()); // canal para enviar ao server
+                inputFromSocket = new Scanner(client.getInputStream()); // canal para receber do servidor
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    
+            while (input.hasNextLine()) {
+                output.println(input.nextLine()); // envia o texto escrito no terminal do Client
+                String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+                System.out.println(receivedData);
+            }
+    
+            output.close();
+            input.close();
+            inputFromSocket.close();
         }
-        out.close();
-        input.close();
+        
     }
 
 }

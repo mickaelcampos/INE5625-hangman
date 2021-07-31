@@ -28,6 +28,7 @@ public class Server {
             while (true) {
                 Socket client = serverSocket.accept(); // bloqueia execução
                 startClientConnection(client);
+                System.out.println("Novo cliente conectado!");
             }
         } catch (Exception e) {
             System.out.println("Ocorreu um erro ao criar o servidor!"); // porta em uso
