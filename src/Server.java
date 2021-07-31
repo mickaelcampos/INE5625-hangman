@@ -13,7 +13,7 @@ public class Server {
         try {
             server.initServer();
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao inicializar o servidor!"); // porta em uso
+            e.printStackTrace();
             System.exit(1);
         }
     }
