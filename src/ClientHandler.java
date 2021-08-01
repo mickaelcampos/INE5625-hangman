@@ -25,13 +25,18 @@ public class ClientHandler implements Runnable {
 
             String receivedData = input.nextLine(); // dados que o cliente enviou
 
-            // tratar se letra esta na palavra
+            // aqui deve tratar se letra esta na palavra
             System.out.println(receivedData);
-            if (receivedData.equals("A")) {
-                output.println("acertou!");
-            } else {
-                output.println("errrrrrrrrou!");
-            }
+            output.println(receivedData);
+            // TESTE
+            // if (receivedData.equals("A")) {
+            //     output.println("acertou!");
+            // } else {
+            //     output.println("errou!");
+            // }
+            // while (input.hasNextLine()) {
+            //     System.out.println(input.nextLine());
+            // }
         }
     }
 
