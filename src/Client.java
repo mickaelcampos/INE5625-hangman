@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    public static final int LISTENING_PORT = 5000;
+    public static final int LISTENING_PORT = 6000;
     public static void main(String[] args) throws UnknownHostException, IOException {
 
         String hostAddress = "127.0.0.1";

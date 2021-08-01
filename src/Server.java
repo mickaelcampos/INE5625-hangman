@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class Server {
 
-    public static final int LISTENING_PORT = 5000;
+    public static final int LISTENING_PORT = 6000;
     public static void main(String[] args) {
 
         Server server = new Server();
