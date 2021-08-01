@@ -1,15 +1,15 @@
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class Hangman {
 
 	public static void main(String[] args) throws Exception {
-		File dictionary = new File("D:\\Java\\Projects\\INE5625-hangman\\src\\dictionary.txt");
+		URL songPath = Hangman.class.getResource("dictionary.txt");		
+		File file = new File(songPath.toURI());
 		
-		Scanner textScanner = new Scanner(dictionary);
+		Scanner textScanner = new Scanner(file);
 		Scanner input = new Scanner(System.in);
 		
 		ArrayList<String> words = new ArrayList<>();
@@ -76,6 +76,11 @@ public class Hangman {
 		
 	}
 	
+	private static Object Hangman() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void drawHangman(int l) {
 		  if(l == 6) {
 		   System.out.println("|----------");
