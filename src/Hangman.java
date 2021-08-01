@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class Hangman {
 
 	public static void main(String[] args) throws Exception {
-	File dictionary = new File("D:\\Java\\Projects\\Hangman ascii\\src\\hangman\\dictionary.txt");
+		File dictionary = new File("D:\\Java\\Projects\\INE5625-hangman\\src\\dictionary.txt");
 		
 		Scanner textScanner = new Scanner(dictionary);
 		Scanner input = new Scanner(System.in);
