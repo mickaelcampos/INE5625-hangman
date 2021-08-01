@@ -1,0 +1,5 @@
+carro
+tesoura
+computador
+comida
+faculdade
