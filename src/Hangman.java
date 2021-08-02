@@ -7,15 +7,13 @@ public class Hangman {
 
     private char[] stream; // dado recebido/enviado
 	private String word;
-	private static boolean finished = false;
-	private static int lives = 6;
+	private boolean finished = false;
+	private int lives = 6;
 	private char[] myAnswers = null;
 
 	public Hangman() {
-		
-		initGame();
-		this.word = myAnswers.toString();
-		this.setStream(myAnswers); // seta a palavra _ _ _ _ _
+		initGame();		
+		System.out.println(this.word);
 	}
 
 	private void initGame() {
@@ -36,18 +34,17 @@ public class Hangman {
 			words.add(textScanner.nextLine());
 		}
 
-		String hidden_text = words.get((int) (Math.random() * words.size()));
-		char[] textArray = hidden_text.toCharArray();
+		this.word = words.get((int) (Math.random() * words.size()));
+		char[] textArray = this.word.toCharArray();
 		myAnswers = new char[textArray.length];
 
 		for (int i = 0; i < textArray.length; i++) {
 			myAnswers[i] = '_';
 		}
+		this.setStream(myAnswers); // seta a palavra _ _ _ _ _
 	}
 
     public void setStream(char[] stream) {
-		System.out.println("aquiii");
-		System.out.println(stream);
         this.stream = stream;
     }
 
