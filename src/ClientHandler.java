@@ -14,29 +14,30 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("run 1");
+
+        Hangman hangman = new Hangman();
+
         while (true) {
+            System.out.println("aqui 1");
+
             try {
                 input = new Scanner(clientSocket.getInputStream()); // canal para receber do cliente
-                output =  new PrintWriter(clientSocket.getOutputStream(), true); // caml para enviar ao cliente
+                output =  new PrintWriter(clientSocket.getOutputStream(), true); // canal para enviar ao cliente
+                System.out.println("aqui 2");
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("aqui 3");
 
-            String receivedData = input.nextLine(); // dados que o cliente enviou
+            char[] receivedData = input.nextLine().toCharArray(); // dados que o cliente enviou
 
             // aqui deve tratar se letra esta na palavra
             System.out.println(receivedData);
-            output.println(receivedData);
-            // TESTE
-            // if (receivedData.equals("A")) {
-            //     output.println("acertou!");
-            // } else {
-            //     output.println("errou!");
-            // }
-            // while (input.hasNextLine()) {
-            //     System.out.println(input.nextLine());
-            // }
+            hangman.setStream(receivedData);
+
+            // output.println(hangman.getStream());
         }
     }
 

@@ -1,4 +1,5 @@
 
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -32,6 +33,10 @@ public class Client {
                 while (input.hasNextLine()) {
                     output.println(input.nextLine()); // envia o texto escrito no terminal do Client
                     String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+
+                    // 1. servidor retorna tamnho da palavra
+                    // 1. printo o jogo
+                    // servidor retorna as posicoes ou um false/ -1
                     System.out.println(receivedData);
                 }
             }
