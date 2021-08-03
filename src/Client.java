@@ -20,6 +20,7 @@ public class Client {
         try { 
             client = new Socket(hostAddress, LISTENING_PORT);
             System.out.println("O client: " + client + " se conectou ao servidor!");
+            System.out.println("\n \n \n----------------------------------------------\n \n \n");
     
             while (true) {
                 try {
@@ -29,26 +30,41 @@ public class Client {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                System.out.print("Digite aqui a letra: ");
                 String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
-                // deve pritnar a forca no estado inicial
-                System.out.println(receivedData);
+                drawHangman(lives);
+                System.out.println("A palavra é: " + receivedData);
+                System.out.print("Insira a próxima letra: ");
+
                 String aux = receivedData;
+
                 while (input.hasNextLine()) {
                     String dataToSend = input.nextLine();
 
                     output.println(dataToSend); // envia o texto escrito no terminal do Client
                     receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+
+                    System.out.print("\033[H\033[2J");  
+                    System.out.flush();  
+
                     if (receivedData.equals(aux)) {
                         // nao acertou
-                        System.out.println("errrou");
+                        System.out.println("Você errou!");
                         lives--;
+                        if(lives == 0) {
+                            System.out.println("O jogo acabou!");
+                            client.close();
+                            output.close();
+                            input.close();
+                            inputFromSocket.close();
+                        }
                     }
-                    System.out.println(lives);
                     drawHangman(lives);
-                    System.out.println(receivedData);
-
+                    System.out.println("A palavra é: " + receivedData);
+                    System.out.print("Insira a próxima letra: ");
+    
                     aux = receivedData;
-                    // servidor retorna as posicoes ou um false/ -1
                 }
             }
         } catch (IOException ioe){
