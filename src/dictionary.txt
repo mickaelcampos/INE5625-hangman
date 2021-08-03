@@ -1,5 +1,13 @@
-carro
 tesoura
 computador
-comida
 faculdade
+segredo
+mensagem
+paralelepipedo
+universidade
+chamada
+professor
+disciplina
+administracao
+sistemas
+informacao
