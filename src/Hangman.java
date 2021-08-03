@@ -34,18 +34,23 @@ public class Hangman {
 			words.add(textScanner.nextLine());
 		}
 
+		// seleciona a palavra
 		this.word = words.get((int) (Math.random() * words.size()));
 		char[] textArray = this.word.toCharArray();
 		myAnswers = new char[textArray.length];
 
 		for (int i = 0; i < textArray.length; i++) {
-			myAnswers[i] = '_';
+			myAnswers[i] = '?';
 		}
-		this.setStream(myAnswers); // seta a palavra _ _ _ _ _
+		this.stream = myAnswers; // seta a palavra nesse formato ? ? ? ? ?
 	}
 
     public void setStream(char[] stream) {
+		System.out.println("setStream!!!");
         this.stream = stream;
+		handleStream();
+		System.out.println("depois do handleStream!!!");
+
     }
 
     public char[] getStream() {
@@ -56,9 +61,22 @@ public class Hangman {
 	 * trata se a letra enviada pelo client esta na palavra
 	 */
 	private void handleStream() {
-		// String letter = this.getStream();
-		boolean find = false;
+		// verificar se a letra esta na palavra
+		boolean found = false;
 
+		for (int i = 0; i < this.word.length(); i++) {
+			if (this.word.charAt(i) == this.stream[0]) {
+				// deve virar ???A??A
+				this.myAnswers[i] = this.stream[0];
+				found = true;
+			}
+		}
+
+		if (!found) {
+			this.lives = this.lives - 1; // decrementa 1 pt de vida
+		} else {
+			this.stream = myAnswers;
+		}
 	}
 
 	// public static void main(String[] args) throws Exception {
@@ -113,64 +131,4 @@ public class Hangman {
 	// 	System.out.println(hidden_text);
 
 	// }
-
-	public static void drawHangman(int l) {
-		if (l == 6) {
-			System.out.println("|----------");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else if (l == 5) {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else if (l == 4) {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|    |");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else if (l == 3) {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|   -|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else if (l == 2) {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|   -|-");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else if (l == 1) {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|   -|-");
-			System.out.println("|   /");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		} else {
-			System.out.println("|----------");
-			System.out.println("|    O");
-			System.out.println("|   -|-");
-			System.out.println("|   /|");
-			System.out.println("|");
-			System.out.println("|");
-			System.out.println("|");
-		}
-	}
 }

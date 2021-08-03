@@ -17,7 +17,8 @@ public class ClientHandler implements Runnable {
         System.out.println("run 1");
 
         Hangman hangman = new Hangman();
-
+        boolean first = true;
+        
         while (true) {
             System.out.println("aqui 1");
 
@@ -31,13 +32,21 @@ public class ClientHandler implements Runnable {
             }
             System.out.println("aqui 3");
 
+            if (first) { // executa apenas na primeira vez
+                output.println(hangman.getStream());
+                first = false;
+            }
+            System.out.println("aqui 4");
+
             char[] receivedData = input.nextLine().toCharArray(); // dados que o cliente enviou
+            System.out.println("aqui 5");
 
             // aqui deve tratar se letra esta na palavra
-            System.out.println(receivedData);
+            // System.out.println(receivedData);
             hangman.setStream(receivedData);
 
-            // output.println(hangman.getStream());
+            output.println(hangman.getStream());
+            System.out.println("aqui 6");
         }
     }
 

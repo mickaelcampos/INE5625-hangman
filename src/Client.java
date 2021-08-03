@@ -16,7 +16,7 @@ public class Client {
         Scanner input = null;
         Scanner inputFromSocket = null;
         PrintStream output = null;
-
+        int lives = 6;
         try { 
             client = new Socket(hostAddress, LISTENING_PORT);
             System.out.println("O client: " + client + " se conectou ao servidor!");
@@ -29,15 +29,28 @@ public class Client {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                System.out.println("aqui 1");
+                String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+                System.out.println("servidor enviou:" + receivedData);
+                // 1. servidor retorna tamnho da palavra
+                // 1. printo o jogo
+                System.out.println("aqui 2");
 
                 while (input.hasNextLine()) {
-                    output.println(input.nextLine()); // envia o texto escrito no terminal do Client
-                    String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+                    String dataToSend = input.nextLine();
+                    System.out.println(dataToSend);
 
-                    // 1. servidor retorna tamnho da palavra
-                    // 1. printo o jogo
-                    // servidor retorna as posicoes ou um false/ -1
+                    output.println(dataToSend); // envia o texto escrito no terminal do Client
+                    receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
+                    if (receivedData == dataToSend) {
+                        // nao acertou
+                        System.out.println("errrou");
+                        lives--;
+                    }
+                    System.out.println(lives);
+                    drawHangman(lives);
                     System.out.println(receivedData);
+                    // servidor retorna as posicoes ou um false/ -1
                 }
             }
         } catch (IOException ioe){
@@ -60,4 +73,64 @@ public class Client {
         }
         
     }
+
+    public static void drawHangman(int l) {
+		if (l == 6) {
+			System.out.println("|----------");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else if (l == 5) {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else if (l == 4) {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|    |");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else if (l == 3) {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|   -|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else if (l == 2) {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|   -|-");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else if (l == 1) {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|   -|-");
+			System.out.println("|   /");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		} else {
+			System.out.println("|----------");
+			System.out.println("|    O");
+			System.out.println("|   -|-");
+			System.out.println("|   /|");
+			System.out.println("|");
+			System.out.println("|");
+			System.out.println("|");
+		}
+	}
 }
