@@ -74,9 +74,8 @@ public class Hangman {
 
 		if (!found) {
 			this.lives = this.lives - 1; // decrementa 1 pt de vida
-		} else {
-			this.stream = myAnswers;
 		}
+		this.stream = myAnswers;
 	}
 
 	// public static void main(String[] args) throws Exception {

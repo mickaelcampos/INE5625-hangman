@@ -29,20 +29,16 @@ public class Client {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("aqui 1");
                 String receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
-                System.out.println("servidor enviou:" + receivedData);
-                // 1. servidor retorna tamnho da palavra
-                // 1. printo o jogo
-                System.out.println("aqui 2");
-
+                // deve pritnar a forca no estado inicial
+                System.out.println(receivedData);
+                String aux = receivedData;
                 while (input.hasNextLine()) {
                     String dataToSend = input.nextLine();
-                    System.out.println(dataToSend);
 
                     output.println(dataToSend); // envia o texto escrito no terminal do Client
                     receivedData = inputFromSocket.nextLine(); // dados que o servidor  enviou
-                    if (receivedData == dataToSend) {
+                    if (receivedData.equals(aux)) {
                         // nao acertou
                         System.out.println("errrou");
                         lives--;
@@ -50,6 +46,8 @@ public class Client {
                     System.out.println(lives);
                     drawHangman(lives);
                     System.out.println(receivedData);
+
+                    aux = receivedData;
                     // servidor retorna as posicoes ou um false/ -1
                 }
             }
